@@ -1,5 +1,5 @@
 name = input("enter your name: ")
 age = int (input("enter your age: "))
 city = input("enter your city: ")
-print("======================")
+print("=====================")
 print (f"{name}\t{age}\t{city}")
