@@ -1,0 +1,6 @@
+first_name = input("enter first your name: ")
+last_name = input("enter last your name: ")
+age = int (input("enter your age: "))
+city = input("enter your city: ")
+print("=======================")
+print(f"Your name is {first_name} {last_name}\nYour age is {age}\nThe city you live in is {city}")

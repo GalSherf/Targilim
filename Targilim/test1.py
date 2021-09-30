@@ -1,0 +1,6 @@
+print("hello people")
+print("hello people1")
+print("hello people2")
+print("hello people3")
+print("hello people4")
+print("hello my people")
