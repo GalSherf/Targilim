@@ -2,6 +2,7 @@ import random
 from Game_cards.Card import Card
 
 class DeckOfCards:
+
     def __init__(self):
         self.Deck_of_cards = []
         suit_list = ['Heart','Spade','Diamond','Club']
@@ -19,8 +20,4 @@ class DeckOfCards:
 
 
 
-deck1 = DeckOfCards()
-print(deck1.Deck_of_cards)
-deck1.shuffle()
-print(deck1.Deck_of_cards)
-print(deck1.deal_one())
+deck = DeckOfCards()
