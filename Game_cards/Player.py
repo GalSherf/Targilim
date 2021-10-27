@@ -24,12 +24,3 @@ class Player:
 
     def add_card(self, card:Card):
         self.pack_of_cards.append(card)
-
-
-card=Card
-deck=DeckOfCards()
-player=Player("tov",10)
-player.set_hand(deck)
-player.get_card()
-print(player.get_card())
-print(player)

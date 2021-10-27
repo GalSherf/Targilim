@@ -19,7 +19,7 @@ class Card:
         else:
             return False
 
-
+    # a method that return printable values
     def __repr__(self):
         return f"{self.value} {self.suit}"
 

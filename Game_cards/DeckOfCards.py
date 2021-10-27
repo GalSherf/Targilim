@@ -11,8 +11,8 @@ class DeckOfCards:
             for value in value_list:
                 card=Card(value,suit)
                 self.Deck_of_cards.append(card)
-
-    def shuffle(self):
+    # a method that shuffle the card
+    def cards_shuffle(self):
         random.shuffle(self.Deck_of_cards)
 
     def deal_one(self):
@@ -21,3 +21,4 @@ class DeckOfCards:
 
 
 deck = DeckOfCards()
+print('{U0002666}')
