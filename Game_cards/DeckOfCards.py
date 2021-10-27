@@ -5,7 +5,7 @@ class DeckOfCards:
 
     def __init__(self):
         self.Deck_of_cards = []
-        suit_list = ['Heart','Spade','Diamond','Club']
+        suit_list = ['♥','♠','🔶','♣']
         value_list = [2,3,4,5,6,7,8,9,10,11,12,13,14]
         for suit in suit_list:
             for value in value_list:
@@ -16,9 +16,8 @@ class DeckOfCards:
         random.shuffle(self.Deck_of_cards)
 
     def deal_one(self):
-        return random.choice(self.Deck_of_cards)
+        rand_num = random.choice(self.Deck_of_cards)
+        self.Deck_of_cards.remove(rand_num)
+        return rand_num
 
 
-
-deck = DeckOfCards()
-print('{U0002666}')

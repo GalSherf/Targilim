@@ -24,6 +24,3 @@ class Card:
         return f"{self.value} {self.suit}"
 
 
-
-
-
