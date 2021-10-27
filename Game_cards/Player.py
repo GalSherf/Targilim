@@ -24,13 +24,3 @@ class Player:
 
     def add_card(self, card:Card):
         self.pack_of_cards.append(card)
-
-    def mo(self,deck_of_cards:DeckOfCards):
-        set1 = set(self.pack_of_cards)
-        while len(self.pack_of_cards) != self.num_of_cards:
-            set1.add(deck_of_cards.deal_one())
-
-
-# deck = DeckOfCards()
-# muki = Player('Muki')
-# print(muki.mo(deck))
