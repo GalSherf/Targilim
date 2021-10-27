@@ -21,12 +21,9 @@ class Card:
 
 
     def __repr__(self):
-        return f"value{self.value},"
+        return f"{self.value} {self.suit}"
 
 
 
-Card1 = Card(ace[1],'Diamond')
-Card2 = Card(ace[1],'Spade')
 
-print(Card1.__gt__(Card2))
 
