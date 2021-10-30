@@ -6,6 +6,8 @@ class CardGame:
         self.deck_of_cards = DeckOfCards()
         self.player1 = Player(name1,num_of_cards)
         self.player2 = Player(name2,num_of_cards)
+        self.player1_pack_of_cards = self.player1.pack_of_cards
+        self.player2_pack_of_cards = self.player2.pack_of_cards
         self.new_game()
 
     def __repr__(self):
