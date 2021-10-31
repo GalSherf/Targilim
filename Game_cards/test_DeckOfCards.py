@@ -22,4 +22,5 @@ class TestDeckOfCards(TestCase):
 
 
     def test_deal_one(self):
-        self.fail()
+        self.card = self.deck1.deal_one()
+        self.assertNotIn(self.card,self.deck1.Deck_of_cards)
