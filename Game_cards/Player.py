@@ -7,9 +7,14 @@ class Player:
     def __init__(self,name, num_of_cards=26):
         self.name=name
         self.num_of_cards=num_of_cards
+        if type(self.name) != str:
+            raise TypeError('invalid type for player name')
+        if type(self.num_of_cards) != int:
+            raise TypeError('invalid type for number of cards')
         if self.num_of_cards>26 or self.num_of_cards<10:
             self.num_of_cards=26
         self.pack_of_cards=[]
+
 
     def __repr__(self):
         return f"{self.name}, {len(self.pack_of_cards)} {self.pack_of_cards}"

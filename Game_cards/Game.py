@@ -3,9 +3,8 @@ from Game_cards.DeckOfCards import DeckOfCards
 from Game_cards.Player import Player
 from Game_cards.CardGame import CardGame
 
-player1 = Player('aba',26 )
+player1 = Player('Avi',26 )
 player2 = Player('Dani',26)
-
 
 game = CardGame(player1.name,player2.name,26)
 

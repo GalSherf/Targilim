@@ -2,7 +2,7 @@ class Card:
     def __init__(self,value,suit):
         if type(value) is not int:
             raise TypeError('invalid type')
-        elif value<1 or value>14:
+        elif 2>value or value>14:
             raise ValueError('invalid value')
         else:
             self.value=value
@@ -15,10 +15,9 @@ class Card:
 
     # a method that checks which card is bigger, depends on value and suit
     def __gt__(self, other):
-        rules={"🔶":1,"♣":2,"♥":3,"♠":4}
+        rules={'♥':1,'♠':2,'🔶':3,'♣':4}
 
         if self.value == other.value:
-           print("self.suit ==",self.suit)
            if rules[self.suit] > rules[other.suit]:
                return True
            else:
