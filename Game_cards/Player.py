@@ -12,7 +12,7 @@ class Player:
         self.pack_of_cards=[]
 
     def __repr__(self):
-        return f"{self.name}, {self.num_of_cards} {self.pack_of_cards}"
+        return f"{self.name}, {len(self.pack_of_cards)} {self.pack_of_cards}"
 
     # a method that deals cards to player
     def set_hand(self, deck_of_cards:DeckOfCards):
