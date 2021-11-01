@@ -8,11 +8,12 @@ class TestCard(TestCase):
         print('setUp')
         self.card=Card(9,"🔶")
 
-
+    # check for a valid value and suit for card
     def test__init__(self):
         self.assertEqual(self.card.value,9)
         self.assertEqual(self.card.suit,"🔶")
 
+    # check for invalid value or suit for card
     def test__init__2(self):
         with self.assertRaises(TypeError):
             self.card.value=Card("abc", "abc")
@@ -20,6 +21,7 @@ class TestCard(TestCase):
             self.card.value=Card(15, "🔶")
         with self.assertRaises(ValueError):
             self.card.value=Card(-2, "🔶")
+
 
 
     def test__gt__(self):

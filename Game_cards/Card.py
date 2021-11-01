@@ -10,7 +10,6 @@ class Card:
             self.suit = suit
         else:
             raise ('invalid suit type')
-        self.full_card = [suit,value]
         self.value_names = {2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10, 11: 'Jack', 12: 'Qween', 13: 'King',14: 'Ace'}
 
     # a method that checks which card is bigger, depends on value and suit
@@ -31,6 +30,14 @@ class Card:
     # a method that return printable values
     def __repr__(self):
         return f"{self.value_names[self.value]} {self.suit}"
+
+    def __eq__(self, another):
+        if self.suit ==  another.suit:
+            return self.suit == another.suit
+
+
+
+
 
 
 if __name__=="__main__":
