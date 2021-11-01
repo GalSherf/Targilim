@@ -38,6 +38,10 @@ class TestCardGame(TestCase):
 
 
     def test_get_winner(self):
-        pass
+        self.game.player1.pack_of_cards.pop()
+        self.assertGreater(len(self.game.player2.pack_of_cards),len(self.game.player1.pack_of_cards))
+        self.assertEqual(self.game.get_winner(),self.game.player2)
+
+
 
 
