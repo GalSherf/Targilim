@@ -1,8 +1,6 @@
 from unittest import TestCase,mock
 from unittest.mock import patch
-
-import Game_cards.Player
-from Player  import *
+from Game_cards import Player
 
 class TestPlayer(TestCase):
 
@@ -10,6 +8,9 @@ class TestPlayer(TestCase):
         self.player = Player('Avi',26)
         self.deck = DeckOfCards()
         print('setUp')
+
+    def tearDown(self):
+        print("tearDown")
 
     # check for invalid types of arguments for player
     def test__init__(self):
@@ -33,9 +34,11 @@ class TestPlayer(TestCase):
 
 
 
-    def test_get_card(self,mock_card):
+    def test_get_card(self):
+        self.player.num_of_cards = 1
         self.player.set_hand(self.deck)
-        self.assertEqual(type(self.player.get_card()),type(Card))
+        self.assertEqual(self.player.pack_of_cards[0],self.player.get_card())
+        self.assertIn(self.player.get_card(),self.player.pack_of_cards)
 
 
     def test_add_card(self):
@@ -52,21 +55,18 @@ class TestPlayer(TestCase):
             self.player.add_card(self.card)
             self.assertIn(self.card, self.player.pack_of_cards)
 
+    def test_add_card3(self):
+        self.player.num_of_cards = 3
+        self.card = Card(8, '♣')
+        with self.assertRaises(ValueError):
+            self.player.add_card(self.card)
+            self.player.add_card(self.card)
+
 
     @mock.patch('Game_cards.DeckOfCards.DeckOfCards.deal_one', return_value=Card(9, '♣'))
     def test_set_hand(self, mock_card):
         self.player.num_of_cards = 1
         self.player.set_hand(self.deck)
-        print(self.player.pack_of_cards)
         self.assertIn(mock_card.return_value,self.player.pack_of_cards)
         self.assertEqual(mock_card.return_value,Card(9, '♣'))
-        # self.assertEqual(Card(9, '♥'),Card(9, '♥'))
-
-
-    # def test_get_card(self):
-    #     self.player.set_hand(self.deck)
-    #     self.assertEqual(, Card(9, '♣'))
-
-
-   # with patch('Game_cards.DeckOfCards.DeckOfCards.deal_one') as mock_card:
-   #          mock_card.return_value = Card(9,'♣')
+        self.assertNotIn(Card(7, '♣'),self.player.pack_of_cards)

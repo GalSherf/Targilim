@@ -16,6 +16,10 @@ class Player:
         self.pack_of_cards=[]
 
 
+
+
+
+
     def __repr__(self):
         return f"{self.name}, {len(self.pack_of_cards)} {self.pack_of_cards}"
 
@@ -30,4 +34,7 @@ class Player:
 
     # a method that add one card to player's hand
     def add_card(self, card:Card):
-        self.pack_of_cards.append(card)
+        if card in self.pack_of_cards:
+            raise ValueError ("this card already in player pack of cards")
+        else:
+            self.pack_of_cards.append(card)

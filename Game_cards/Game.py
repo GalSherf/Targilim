@@ -2,11 +2,9 @@ from Game_cards.Card import Card
 from Game_cards.DeckOfCards import DeckOfCards
 from Game_cards.Player import Player
 from Game_cards.CardGame import CardGame
-
-player1 = Player('Avi',26 )
-player2 = Player('Dani',26)
-
-game = CardGame(player1.name,player2.name,26)
+player1 = Player(input("enter player name: "))
+player2 = Player(input("enter player name: "))
+game = CardGame(player1.name,player2.name)
 
 
 print(f"{game.player1}\n{game.player2}")
@@ -30,6 +28,3 @@ elif game.get_winner() == game.player2:
     print(F"The winner is: {game.player2.name} with {len(game.player2.pack_of_cards)} cards")
 elif game.get_winner()== None:
     print("nobody won this time")
-
-
-

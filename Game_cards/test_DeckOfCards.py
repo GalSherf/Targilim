@@ -9,6 +9,9 @@ class TestDeckOfCards(TestCase):
         print('Set Up')
         self.deck1 = DeckOfCards()
 
+    def tearDown(self):
+        print("tearDown")
+
     # check that there are 52 cards in a deck
     def test__init__(self):
         self.assertEqual(len(self.deck1.Deck_of_cards),52)
