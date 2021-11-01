@@ -23,8 +23,8 @@ for i in range(10):
         game.player1.pack_of_cards.remove(a)
 
 if game.get_winner() == game.player1:
-    print(F"The winner is: {game.player1.name} with {len(game.player1.pack_of_cards)} cards")
+    print(F"The winner is: {game.player1.name} with {len(game.player1.pack_of_cards)} cards\n{game.player1.pack_of_cards}")
 elif game.get_winner() == game.player2:
-    print(F"The winner is: {game.player2.name} with {len(game.player2.pack_of_cards)} cards")
+    print(F"The winner is: {game.player2.name} with {len(game.player2.pack_of_cards)} cards\n{game.player2.pack_of_cards}")
 elif game.get_winner()== None:
     print("nobody won this time")
