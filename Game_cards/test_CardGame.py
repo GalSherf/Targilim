@@ -39,8 +39,6 @@ class TestCardGame(TestCase):
         self.assertEqual(len(self.game.player1.pack_of_cards), self.game.player1.num_of_cards)
         self.assertEqual(len(self.game.player2.pack_of_cards), self.game.player2.num_of_cards)
         self.assertNotEqual(self.game.deck_of_cards.Deck_of_cards,self.deck.Deck_of_cards)
-        print(self.game.deck_of_cards.Deck_of_cards)
-        print(self.deck.Deck_of_cards)
 
 
     def test_get_winner(self):
@@ -48,6 +46,9 @@ class TestCardGame(TestCase):
         self.assertGreater(len(self.game.player2.pack_of_cards),len(self.game.player1.pack_of_cards))
         self.assertEqual(self.game.get_winner(),self.game.player2)
 
+    def test_get_winner2(self):
+        self.assertEqual(len(self.game.player2.pack_of_cards),len(self.game.player1.pack_of_cards))
+        self.assertEqual(self.game.get_winner(),None)
 
 
 
