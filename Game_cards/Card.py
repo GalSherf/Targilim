@@ -8,7 +8,7 @@ class Card:
             raise ValueError('invalid value')
         else:
             self.value=value
-        #     if suit of card is not valid, error will appear
+        # if suit of card is not valid, error will appear
         if suit in ['♥','♠','🔶','♣']:
             self.suit = suit
         else:
@@ -19,6 +19,7 @@ class Card:
     def __gt__(self, other):
         rules={'♥':1,'♠':2,'🔶':3,'♣':4}
 
+        # compares values and suit of two cards
         if self.value == other.value:
            if rules[self.suit] > rules[other.suit]:
                return True
@@ -34,7 +35,7 @@ class Card:
     def __repr__(self):
         return f"{self.value_names[self.value]} {self.suit}"
 
-    # a method that compares two cards
+    # a method that compares two equal cards
     def __eq__(self, other):
         if type(other) != Card:
             raise TypeError('invalid type of argument for card')

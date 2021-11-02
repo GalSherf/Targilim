@@ -12,6 +12,9 @@ class DeckOfCards:
                 card=Card(value,suit)
                 self.Deck_of_cards.append(card)
 
+    def __repr__(self):
+        return f"{self.Deck_of_cards}"
+
 
     # a method that shuffle the card
     def cards_shuffle(self):
