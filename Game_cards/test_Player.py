@@ -47,7 +47,7 @@ class TestPlayer(TestCase):
         self.assertNotIn(Card(7, '♣'),self.player.pack_of_cards)
         self.assertEqual(len(self.player.pack_of_cards),1)
 
-    # deals one card to player, and check if the returned card is equal to it
+    # deals one card to player, and check if the returned card (from get_card method) is equal to it
     def test_get_card(self):
         self.player.num_of_cards = 1
         self.player.set_hand(self.deck)

@@ -19,13 +19,13 @@ class TestCard(TestCase):
     # check for invalid value or suit for card
     def test__init__2(self):
         with self.assertRaises(TypeError):
-            self.card.value = Card(7, "abc")
+            self.card1 = Card(7, "abc")
         with self.assertRaises(TypeError):
-            self.card.value = Card("abc", "🔶")
+            self.card2 = Card("abc", "🔶")
         with self.assertRaises(ValueError):
-            self.card.value = Card(15, "🔶")
+            self.card3 = Card(15, "🔶")
         with self.assertRaises(ValueError):
-            self.card.value = Card(-2, "🔶")
+            self.card4 = Card(-2, "🔶")
 
     # test the __gt__ method, when card is bigger then other card
     def test__gt__(self):

@@ -33,5 +33,3 @@ class CardGame:
             return self.player2
         else:
             return None
-
-
