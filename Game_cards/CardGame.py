@@ -15,8 +15,6 @@ class CardGame:
         else:
             self.player2 = Player(name2, num_of_cards)
         self.new_game()
-        name1 = Player(name1,num_of_cards)
-        name2 = Player(name2,num_of_cards)
 
     def __repr__(self):
         return f"{self.player1}\n{self.player2}"
@@ -27,7 +25,7 @@ class CardGame:
         self.player1.set_hand(self.deck_of_cards)
         self.player2.set_hand(self.deck_of_cards)
 
-    # a method that returns the player who wins. if draw - None
+    # a method that checks players length of pack and returns the player who wins (have more cards). if same length, it's draw, returns None
     def get_winner(self):
         if len(self.player1.pack_of_cards) > len(self.player2.pack_of_cards):
             return self.player1
@@ -35,13 +33,5 @@ class CardGame:
             return self.player2
         else:
             return None
-
-
-if __name__=="__main__":
-
-    game = CardGame('avi','Daniel',10)
-    print(game)
-
-    print(game.get_winner())
 
 

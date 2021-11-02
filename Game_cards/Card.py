@@ -1,11 +1,14 @@
 class Card:
     def __init__(self,value,suit):
+        # if value of card is not a number, error will appear
         if type(value) is not int:
             raise TypeError('invalid type')
+        # if value of card is out of range, error will appear
         elif 2>value or value>14:
             raise ValueError('invalid value')
         else:
             self.value=value
+        #     if suit of card is not valid, error will appear
         if suit in ['♥','♠','🔶','♣']:
             self.suit = suit
         else:
@@ -31,20 +34,10 @@ class Card:
     def __repr__(self):
         return f"{self.value_names[self.value]} {self.suit}"
 
-    # a method that compares between two cards
+    # a method that compares two cards
     def __eq__(self, other):
         if type(other) != Card:
-            raise TypeError ('invalid type of argument for card')
+            raise TypeError('invalid type of argument for card')
         if self.suit == other.suit and self.value == other.value:
             return True
         return False
-
-
-
-
-
-
-
-if __name__=="__main__":
-    card1=Card(9,"🔶")
-    print(card1)

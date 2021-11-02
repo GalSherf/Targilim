@@ -19,33 +19,30 @@ class TestCard(TestCase):
     # check for invalid value or suit for card
     def test__init__2(self):
         with self.assertRaises(TypeError):
-            self.card.value = Card("abc", "abc")
+            self.card.value = Card(7, "abc")
+        with self.assertRaises(TypeError):
+            self.card.value = Card("abc", "🔶")
         with self.assertRaises(ValueError):
             self.card.value = Card(15, "🔶")
         with self.assertRaises(ValueError):
             self.card.value = Card(-2, "🔶")
 
+    # test the __gt__ method, when card is bigger then other card
     def test__gt__(self):
         self.card2 = Card(9, "♣")
         self.assertEqual(self.card.value, self.card2.value)
         self.assertNotEqual(self.card.suit, self.card2.suit)
-        self.assertGreater(self.card2, self.card)
         self.assertIsNot(self.card, self.card2)
+        self.assertGreater(self.card2, self.card)
+        self.assertTrue(self.card2.__gt__(self.card))
+        self.assertFalse(self.card.__gt__(self.card2))
 
-    def test__gt__2(self):
-        self.other = Card(9, "♣")
-        with self.assertRaises(TypeError):
-            self.other.value("abc", "abc")
-        with self.assertRaises(ValueError):
-            self.card.value = Card(15, "🔶")
-        with self.assertRaises(ValueError):
-            self.card.value = Card(-2, "🔶")
-
-
+    # test the __eq__ method, when card is equal to other card
     def test__eq__(self):
         self.card1 = Card(9, "🔶")
         self.card2 = Card(9, "♣")
         self.card3 = Card(8, "🔶")
         self.assertEqual(self.card,self.card1)
-        self.assertNotEqual(self.card,self.card2)
-        self.assertNotEqual(self.card,self.card3)
+        self.assertTrue(self.card.__eq__(self.card1))
+        self.assertFalse(self.card.__eq__(self.card2))
+        self.assertFalse(self.card.__eq__(self.card3))

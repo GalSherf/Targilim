@@ -5,23 +5,20 @@ import random
 class Player:
 
     def __init__(self,name, num_of_cards=26):
-        self.name=name
-        self.num_of_cards=num_of_cards
-        if type(self.name) != str:
+        if type(name) != str:
             raise TypeError('invalid type for player name')
-        if type(self.num_of_cards) != int:
+        else:
+            self.name = name
+        if type(num_of_cards) != int:
             raise TypeError('invalid type for number of cards')
+        else:
+            self.num_of_cards = num_of_cards
         if self.num_of_cards>26 or self.num_of_cards<10:
             self.num_of_cards=26
         self.pack_of_cards=[]
 
-
-
-
-
-
     def __repr__(self):
-        return f"{self.name}, {len(self.pack_of_cards)} {self.pack_of_cards}"
+        return f"name: {self.name}, number of cards: {len(self.pack_of_cards)}, pack of player: {self.pack_of_cards}"
 
     # a method that deals cards to player
     def set_hand(self, deck_of_cards:DeckOfCards):

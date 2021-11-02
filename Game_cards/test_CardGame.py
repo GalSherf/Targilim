@@ -18,9 +18,12 @@ class TestCardGame(TestCase):
         print("tearDown")
 
     def test__init__(self):
-        self.assertEqual(self.player1.name,self.player1.name)
-        self.assertEqual(self.player1.num_of_cards,self.player1.num_of_cards)
-        self.assertEqual(len(self.deck.Deck_of_cards),52)
+        self.assertEqual(self.player1.name,self.game.player1.name)
+        self.assertEqual(self.player2.name,self.game.player2.name)
+        self.assertEqual(self.player1.num_of_cards,len(self.game.player1.pack_of_cards))
+        self.assertNotEqual(len(self.game.deck_of_cards.Deck_of_cards),len(self.deck.Deck_of_cards))
+        self.len_deck = len(self.deck.Deck_of_cards) - (self.game.player1.num_of_cards + self.game.player2.num_of_cards)
+        self.assertEqual(len(self.game.deck_of_cards.Deck_of_cards), self.len_deck)
         for i in self.deck.Deck_of_cards:
           self.assertEqual(self.deck.Deck_of_cards.count(i),1)
 
@@ -35,6 +38,9 @@ class TestCardGame(TestCase):
     def test_new_game(self):
         self.assertEqual(len(self.game.player1.pack_of_cards), self.game.player1.num_of_cards)
         self.assertEqual(len(self.game.player2.pack_of_cards), self.game.player2.num_of_cards)
+        self.assertNotEqual(self.game.deck_of_cards.Deck_of_cards,self.deck.Deck_of_cards)
+        print(self.game.deck_of_cards.Deck_of_cards)
+        print(self.deck.Deck_of_cards)
 
 
     def test_get_winner(self):
