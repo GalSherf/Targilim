@@ -22,7 +22,7 @@ class HomePage:
         return self.driver.find_element(By.ID, 'speakersImg')
 
     def click_headphones(self):
-        self.speakers().click()
+        self.headphones().click()
 
     def tablets(self):
         return self.driver.find_element(By.ID, 'tabletsImg')
@@ -38,6 +38,9 @@ class HomePage:
 
     def logo(self):
         return self.driver.find_element(By.CLASS_NAME, 'logo')
+
+    def click_logo(self):
+        self.logo().click()
 
     def user(self):
         return self.driver.find_element(By.ID, 'menuUserLink')

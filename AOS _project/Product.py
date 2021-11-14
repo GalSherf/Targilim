@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class Product:
@@ -8,12 +9,24 @@ class Product:
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
 
-    def choose_color(self, color):
-        color = self.driver.find_elements(By.ID, 'rabbit')
-        color[-1].click()
+    def choose_color(self, number):
+        colors = self.driver.find_elements(By.ID, 'rabbit')
+        colors[number].click()
 
-    def choose_quantity(self, quantity):
-        product_quantity = self.driver.find_element(By.CSS_SELECTOR, "input[name='quantity']")
-        product_quantity.click()
-        product_quantity.clear()
-        product_quantity.send_keys(quantity)
+    def quantity(self):
+        return self.driver.find_element(By.CSS_SELECTOR, "[name='quantity']")
+
+    def type_quantity(self, number):
+        self.quantity().send_keys(number)
+
+    def quantity_plus(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '.plus')
+
+    def click_plus(self):
+        self.quantity_plus().click()
+
+    def add_to_cart(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '[name="save_to_cart"]')
+
+    def click_add_to_cart(self):
+        self.add_to_cart().click()

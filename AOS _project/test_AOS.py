@@ -28,13 +28,31 @@ class TestAccount(TestCase):
         self.account = Account(self.driver)
         self.category = Category(self.driver)
         self.product = Product(self.driver)
-        sleep(10)
+        sleep(2)
 
     def test1(self):
+        self.wait.until(EC.visibility_of_element_located((By.ID, 'speakersImg')))
         self.home_page.click_headphones()
+        self.category.get_into_product(2)
+        self.product.choose_color(-1)
+        sleep(1)
+        for i in range(2):
+            self.product.click_plus()
+        sleep(0.5)
+        self.product.click_add_to_cart()
+        self.home_page.click_logo()
+        self.home_page.speakers().click()
+        sleep(0.5)
+        self.category.get_into_product(-1)
+        sleep(1.5)
+        self.product.click_plus()
+        self.product.click_plus()
+        sleep(0.5)
+        self.product.click_add_to_cart()
+
 
 
     def tearDown(self):
-        sleep(3)
+        sleep(2)
         print("tearDown")
         self.driver.close()
