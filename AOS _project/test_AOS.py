@@ -84,13 +84,10 @@ class TestAccount(TestCase):
         self.assertEqual("YELLOW", self.product.color_of_product_in_cart(0))
         self.assertEqual("TURQUOISE", self.product.color_of_product_in_cart(1))
         self.assertEqual("PURPLE", self.product.color_of_product_in_cart(2))
-        self.assertEqual(self.product.total_price(), self.product.total_item_price(0) + self.product.total_item_price(1) + self.product.total_item_price(2))
         self.assertEqual(headphone_price * self.product.quantity_of_product_in_cart(0), self.product.total_item_price(0))
         self.assertEqual(speaker_price * self.product.quantity_of_product_in_cart(1), self.product.total_item_price(1))
         self.assertEqual(laptop_price * self.product.quantity_of_product_in_cart(2), self.product.total_item_price(2))
-        print(self.product.items_in_cart()[0].get_attribute("value"))
-        print(self.product.items_in_cart()[1].get_attribute("value"))
-        print(self.product.items_in_cart()[2].get_attribute("value"))
+        self.assertEqual(self.product.total_price(), self.product.total_item_price(0) + self.product.total_item_price(1) + self.product.total_item_price(2))
 
     # add at least 2 products to cart, remove one and check that it's not in cart anymore
     def test3(self):
@@ -120,8 +117,10 @@ class TestAccount(TestCase):
     def test5(self):
         self.home_page.laptops().click()
         self.category.click_on_product(3)
+        price = self.product.item_price()
         self.product.add_to_cart().click()
         self.product.hover_cart().click()
+        print(price+1)
 
     def test10(self):
         self.home_page.user().click()
@@ -130,7 +129,8 @@ class TestAccount(TestCase):
         self.account.signIn_button().click()
         self.assertEqual(self.account.user_menu_options(0), "My account")
         sleep(2)
-        self.home_page.user().click()
+        self.home_page.click_sign_out_btn()
+
 
 
 
