@@ -70,20 +70,20 @@ class TestAccount(TestCase):
         self.product.add_to_cart().click()
         self.home_page.logo().click()
         self.home_page.laptops().click()
-        self.category.click_on_product(-2)
+        self.category.click_on_product(1)
         laptop_price = self.product.item_price()
         self.product.quantity_plus().click()
         self.product.add_to_cart().click()
 
         self.assertEqual("HP H2310 IN-EAR HEADSET", self.product.text_name_prod_in_cart(-1))
         self.assertIn("BOSE SOUNDLINK WIRELESS", self.product.text_name_prod_in_cart(1))
-        self.assertEqual("HP STREAM - 11-D020NR LAPTOP", self.product.text_name_prod_in_cart(0))
+        self.assertIn("HP CHROMEBOOK 14 G1(ES)", self.product.text_name_prod_in_cart(0))
         self.assertEqual(4, self.product.quantity_of_product_in_cart(0))
         self.assertEqual(3, self.product.quantity_of_product_in_cart(1))
         self.assertEqual(2, self.product.quantity_of_product_in_cart(2))
         self.assertEqual("YELLOW", self.product.color_of_product_in_cart(0))
         self.assertEqual("TURQUOISE", self.product.color_of_product_in_cart(1))
-        self.assertEqual("PURPLE", self.product.color_of_product_in_cart(2))
+        self.assertEqual("GRAY", self.product.color_of_product_in_cart(2))
         self.assertEqual(headphone_price * self.product.quantity_of_product_in_cart(0), self.product.total_item_price(0))
         self.assertEqual(speaker_price * self.product.quantity_of_product_in_cart(1), self.product.total_item_price(1))
         self.assertEqual(laptop_price * self.product.quantity_of_product_in_cart(2), self.product.total_item_price(2))
@@ -120,7 +120,11 @@ class TestAccount(TestCase):
         price = self.product.item_price()
         self.product.add_to_cart().click()
         self.product.hover_cart().click()
-        print(price+1)
+
+    def test6(self):
+        self.home_page.tablets().click()
+        self.category.click_on_product(1)
+        self.product.add_to_cart().click()
 
     def test10(self):
         self.home_page.user().click()

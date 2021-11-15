@@ -20,7 +20,16 @@ class Product:
         self.colors()[num].click()
 
     def item_price(self):
-        return float(self.driver.find_element(By.CSS_SELECTOR, "#Description>h2").get_attribute("innerHTML")[2:-158])
+        # return float(self.driver.find_element(By.CSS_SELECTOR, "#Description>h2").get_attribute("innerHTML")[2:-158])
+        price = self.driver.find_element(By.CSS_SELECTOR, "#Description>h2").get_attribute("innerHTML")
+        if len(price) == 176:
+            return float(price[2:8])
+        elif len(price) < 176:
+            return float(price[2:7])
+        elif len(price) > 176:
+            return float(price[2] + price[4:10])
+        else:
+            print(len(price))
 
     def quantity(self):
         return self.driver.find_element(By.CSS_SELECTOR, "[name='quantity']")
@@ -62,11 +71,18 @@ class Product:
     def total_item_price(self, num):
         prices = self.driver.find_elements(By.CSS_SELECTOR, '[class="price roboto-regular ng-binding"]')
         prices.reverse()
-        return float(prices[num].get_attribute("innerHTML")[1:])
+        if len(prices[num].get_attribute("innerHTML")) <= 7:
+            return float(prices[num].get_attribute("innerHTML")[1:])
+        else:
+            return float(prices[num].get_attribute("innerHTML")[1] + prices[num].get_attribute("innerHTML")[3:])
+            # return len(prices[num].get_attribute("innerHTML"))
 
     def total_price(self):
         total_price = self.driver.find_element(By.CSS_SELECTOR, '[class="roboto-medium cart-total ng-binding"]')
-        return float(total_price.get_attribute("innerHTML")[1:])
+        if len(total_price.get_attribute("innerHTML")) <= 7:
+            return float(total_price.get_attribute("innerHTML")[1:])
+        else:
+            return float(total_price.get_attribute("innerHTML")[1] + total_price.get_attribute("innerHTML")[3:])
 
     def x_button_in_cart(self):
         return self.driver.find_elements(By.CSS_SELECTOR, '[class="removeProduct iconCss iconX"]')
