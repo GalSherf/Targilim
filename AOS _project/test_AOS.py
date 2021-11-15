@@ -28,31 +28,50 @@ class TestAccount(TestCase):
         self.account = Account(self.driver)
         self.category = Category(self.driver)
         self.product = Product(self.driver)
-        sleep(2)
 
+    # add 2 products in different quantities that bigger then 1, and check the total number of items in cart
     def test1(self):
+        self.home_page.mice().click()
+        self.category.click_on_product(1)
+        self.product.choose_color(1)
+        for i in range(3):
+            self.product.quantity_plus().click()
+        self.product.add_to_cart().click()
+        self.home_page.logo().click()
+        self.home_page.laptops().click()
+        self.category.click_on_product(-2)
+        self.product.quantity_plus().click()
+        self.product.add_to_cart().click()
+
+        self.assertEqual(self.product.item_num_in_cart(), "6")
+
+    # add 3 products to cart and check if their details appear in the shopping-cart popUp
+    def test2(self):
         self.wait.until(EC.visibility_of_element_located((By.ID, 'speakersImg')))
-        self.home_page.click_headphones()
-        self.category.get_into_product(2)
+        self.home_page.headphones().click()
+        self.category.click_on_product(2)
         self.product.choose_color(-1)
-        sleep(1)
-        for i in range(2):
-            self.product.click_plus()
-        sleep(0.5)
-        self.product.click_add_to_cart()
-        self.home_page.click_logo()
+        for i in range(3):
+            self.product.quantity_plus().click()
+        self.product.add_to_cart().click()
+        self.home_page.logo().click()
         self.home_page.speakers().click()
-        sleep(0.5)
-        self.category.get_into_product(-1)
-        sleep(1.5)
-        self.product.click_plus()
-        self.product.click_plus()
-        sleep(0.5)
-        self.product.click_add_to_cart()
+        self.category.click_on_product(1)
+        for i in range(2):
+            self.product.quantity_plus().click()
+        self.product.add_to_cart().click()
+        self.home_page.logo().click()
+        self.home_page.laptops().click()
+        self.category.click_on_product(-2)
+        self.product.quantity_plus().click()
+        self.product.add_to_cart().click()
 
-
+        self.assertEqual(self.product.text_name_prod_in_cart(-1), "HP H2310 IN-EAR HEADSET")
+        self.assertIn("BOSE SOUNDLINK WIRELESS", self.product.text_name_prod_in_cart(1))
+        self.assertEqual("HP STREAM - 11-D020NR LAPTOP", self.product.text_name_prod_in_cart(0))
 
     def tearDown(self):
         sleep(2)
         print("tearDown")
         self.driver.close()
+

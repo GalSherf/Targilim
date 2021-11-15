@@ -10,6 +10,7 @@ from selenium.webdriver import ActionChains
 import random
 from HomePage import HomePage
 from Product import *
+from Category import *
 
 service1 = Service(r"C:\selenium\chromedriver.exe")
 
@@ -19,27 +20,22 @@ driver.get("https://www.advantageonlineshopping.com/#/")
 driver.maximize_window()
 driver.implicitly_wait(10)
 wait = WebDriverWait(driver,10)
-
-# driver.refresh()
-# user = driver.find_element(By.ID, 'menuUserLink')
-# user.click()
-# sleep(2)
-# create_user = driver.find_element(By.CSS_SELECTOR, '[class="create-new-account ng-scope"]')
-# create_user.click()
+homepage = HomePage(driver)
 product = Product(driver)
-headphones = driver.find_element(By.ID, 'headphonesImg')
-headphones.click()
+category = Category(driver)
 
-prodc= driver.find_elements(By.CSS_SELECTOR, '[class="cell categoryRight"] > ul > li')
-prodc[2].click()
+homepage.headphones().click()
+category.click_on_product(2)
+product.add_to_cart().click()
+homepage.logo().click()
 
-color = driver.find_elements(By.ID, 'rabbit')
-color[-1].click()
-product.type_quantity(4)
+homepage.laptops().click()
+category.click_on_product(-2)
+product.quantity_plus().click()
+product.quantity_plus().click()
+product.add_to_cart().click()
 
-
-
-
+product.product_quantity_in_cart()
 
 
 
