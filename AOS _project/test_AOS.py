@@ -123,3 +123,17 @@ class TestAccount(TestCase):
         self.product.add_to_cart().click()
         self.product.hover_cart().click()
 
+    def test10(self):
+        self.home_page.user().click()
+        self.account.popUp_username().send_keys("BasaLo")
+        self.account.popUp_password().send_keys("Tester1")
+        self.account.signIn_button().click()
+        self.assertEqual(self.account.user_menu_options(0), "My account")
+        sleep(2)
+        self.home_page.user().click()
+
+
+
+
+
+

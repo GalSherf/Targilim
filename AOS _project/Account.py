@@ -60,3 +60,21 @@ class Account:
 
     def edit_payment(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[href="#/accountPaymentEdit"]')
+
+    def popUp_username(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '[name="username"]')
+
+    def popUp_password(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '[name="password"]')
+
+    def signIn_button(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '[type="button"]')
+
+    def loggedIn_username(self):
+        return self.driver.find_element(By.CSS_SELECTOR, "#menuUserLink>span")
+
+    def user_menu(self):
+        return self.driver.find_elements(By.CSS_SELECTOR, "#menuUserLink>div>label")
+
+    def user_menu_options(self, number):
+        return self.user_menu()[number].get_attribute("innerHTML")

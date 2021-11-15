@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from time import sleep
 
 
 class HomePage:
@@ -30,7 +31,8 @@ class HomePage:
         return self.driver.find_element(By.ID, 'menuUserLink')
 
     def create_user(self):
-        return self.driver.find_element(By.CSS_SELECTOR, '[class="create-new-account ng-scope"]')
+        self.wait.until(EC.text_to_be_present_in_element((By.LINK_TEXT, "CREATE NEW ACCOUNT"), "CREATE NEW ACCOUNT"))
+        return self.driver.find_element(By.LINK_TEXT, "CREATE NEW ACCOUNT")
 
     def shopping_cart(self):
         return self.driver.find_element(By.ID, 'shoppingCartLink')
@@ -50,6 +52,7 @@ class HomePage:
         self.my_orders_btn().click()
 
     def sign_out_btn(self):
+        self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '[class="option ng-scope"][translate="Sign_out"]')))
         return self.driver.find_element(By.CSS_SELECTOR, '[class="option ng-scope"][translate="Sign_out"]')
 
     def click_sign_out_btn(self):
