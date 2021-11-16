@@ -123,6 +123,7 @@ class TestAccount(TestCase):
 
         self.assertEqual(self.shopping_cart.shopping_text(), "SHOPPING CART")
 
+    # add at least 3 products to cart and check if the sum of their prices is equal to total price in shopping cart page
     def test5(self):
         self.home_page.tablets().click()
         self.category.click_on_product(2)
@@ -168,8 +169,8 @@ class TestAccount(TestCase):
         self.home_page.mice().click()
         self.category.click_on_product(4)
         self.product.add_to_cart().click()
-
-
+        self.home_page.shopping_cart().click()
+        self.shopping_cart.edit_product(4)
 
     def test10(self):
         self.home_page.user().click()

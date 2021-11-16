@@ -43,9 +43,9 @@ homepage.headphones().click()
 category.click_on_product(2)
 product.add_to_cart().click()
 homepage.shopping_cart().click()
-print(shopping_cart.total_price())
+shopping_cart.edit_product(0).click()
 
 
 
-sleep(2)
+sleep(4)
 driver.close()
