@@ -13,3 +13,12 @@ class Category:
 
     def click_on_product(self, num):
         self.get_into_product()[num].click()
+
+    def category_element(self):
+        return self.driver.find_element(By.CSS_SELECTOR, ".categoryTitle")
+
+    def category_name(self):
+        return self.category_element().text
+
+    def page_element(self):
+        return self.driver.find_element(By.NAME, "article")

@@ -193,6 +193,17 @@ class TestAccount(TestCase):
         self.assertEqual(self.shopping_cart.product_quantity(0), tablet_quantity)
         self.assertEqual(self.shopping_cart.product_quantity(1), mice_quantity)
 
+    # after choosing a tablet go back to tablets and then go back to home page
+    def test7(self):
+        self.home_page.tablets().click()
+        tablets = self.category.category_name()
+        self.category.click_on_product(1)
+        self.product.add_to_cart().click()
+        self.driver.back()
+        self.assertTrue(self.category.category_name() == tablets)
+        self.driver.back()
+
+
     # need to be fixed
     # def test10(self):
     #     self.home_page.user().click()
