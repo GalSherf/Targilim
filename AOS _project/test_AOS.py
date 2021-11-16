@@ -128,7 +128,6 @@ class TestAccount(TestCase):
         self.category.click_on_product(2)
         tablet_price = self.product.item_price()
         tablet_name = self.product.product_name()
-        tablet_color = self.product.colors()[-1].get_attribute("title")
         self.product.choose_color(-1)
         for i in range(5):
             self.product.quantity_plus().click()
@@ -139,40 +138,38 @@ class TestAccount(TestCase):
         self.category.click_on_product(-3)
         mice_price = self.product.item_price()
         mice_name = self.product.product_name()
-        mice_color = self.product.colors()[0].get_attribute("title")
+        self.product.choose_color(1)
         for i in range(4):
             self.product.quantity_plus().click()
         mice_quantity = int(self.product.quantity().get_attribute("value"))
         self.product.add_to_cart().click()
         self.home_page.logo().click()
         self.home_page.laptops().click()
-        self.category.click_on_product(-1)
+        self.category.click_on_product(-2)
         laptop_price = self.product.item_price()
         laptop_name = self.product.product_name()
-        laptop_color = self.product.colors()[0].get_attribute("title")
         self.product.quantity_plus().click()
         laptop_quantity = int(self.product.quantity().get_attribute("value"))
         self.product.add_to_cart().click()
         self.home_page.shopping_cart().click()
-        # self.assertEqual(tablet_name, self.product.text_name_prod_in_cart(-1))
-        # self.assertIn(mice_name[:20], self.product.text_name_prod_in_cart(1))
-        # self.assertIn(laptop_name[:20], self.product.text_name_prod_in_cart(0))
-        # self.assertEqual(tablet_quantity, self.product.quantity_of_product_in_cart(2))
-        # self.assertEqual(mice_quantity, self.product.quantity_of_product_in_cart(1))
-        # self.assertEqual(laptop_quantity, self.product.quantity_of_product_in_cart(0))
-        self.assertEqual(laptop_color, self.shopping_cart.product_color(0))
-        self.assertEqual(mice_color, self.shopping_cart.product_color(1))
-        self.assertEqual(tablet_color, self.shopping_cart.product_color(-1))
-        # self.assertEqual(tablet_price * self.product.quantity_of_product_in_cart(2),self.product.total_item_price(2))
-        # self.assertEqual(tablet_price * self.product.quantity_of_product_in_cart(1), self.product.total_item_price(1))
-        # self.assertEqual(laptop_price * self.product.quantity_of_product_in_cart(0), self.product.total_item_price(0))
-        # self.assertEqual(self.product.total_price(), self.product.total_item_price(0) + self.product.total_item_price(1) + self.product.total_item_price(2))
+        self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[class="select  ng-binding"]')))
+        total_price = tablet_quantity * tablet_price + mice_price * mice_quantity + laptop_quantity * laptop_price
+        print(f"product: {tablet_name}, quantity: {tablet_quantity}, price: {tablet_price}")
+        print(f"product: {mice_name}, quantity: {mice_quantity}, price: {mice_price}")
+        print(f"product: {laptop_name}, quantity: {laptop_quantity}, price: {laptop_price}")
 
+        self.assertEqual(total_price, self.shopping_cart.total_price())
 
     def test6(self):
         self.home_page.tablets().click()
         self.category.click_on_product(1)
         self.product.add_to_cart().click()
+        self.home_page.logo().click()
+        self.home_page.mice().click()
+        self.category.click_on_product(4)
+        self.product.add_to_cart().click()
+
+
 
     def test10(self):
         self.home_page.user().click()

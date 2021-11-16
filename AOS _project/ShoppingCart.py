@@ -21,3 +21,12 @@ class ShoppingCart:
     def product_color(self, number):
         colors = self.driver.find_elements(By.CLASS_NAME, "productColor")
         return colors[number].get_attribute("title")
+
+    def total_price(self):
+        price = self.driver.find_element(By.CSS_SELECTOR, '#shoppingCart>table>tfoot>tr>td>span[class="roboto-medium ng-binding"]').text
+        if len(price) < 8:
+            return float(price[1:])
+        elif len(price) == 9:
+            return float(price[1] + price[3:])
+        else:
+           return float(price[1:2] + price[4:])

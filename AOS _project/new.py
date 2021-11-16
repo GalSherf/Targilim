@@ -43,9 +43,7 @@ homepage.headphones().click()
 category.click_on_product(2)
 product.add_to_cart().click()
 homepage.shopping_cart().click()
-print("laptop",shopping_cart.product_color(0))
-print("headphone",shopping_cart.product_color(1))
-print(shopping_cart.product_color(2))
+print(shopping_cart.total_price())
 
 
 
