@@ -102,17 +102,21 @@ class TestAccount(TestCase):
     def test3(self):
         self.home_page.headphones().click()
         self.category.click_on_product(-1)
+        headphone = self.product.product_name()
         self.product.add_to_cart().click()
         self.home_page.logo().click()
         self.home_page.tablets().click()
         self.category.click_on_product(-1)
+        tablet = self.product.product_name()
         self.product.add_to_cart().click()
-        self.assertEqual(self.product.text_name_prod_in_cart(1), "LOGITECH USB HEADSET H390")
+        # assert happens before add to cart
+        self.assertEqual(self.product.text_name_prod_in_cart(1), headphone)
+        self.assertEqual(self.product.text_name_prod_in_cart(0), tablet)
         self.assertEqual(len(self.product.x_button_in_cart()), 2)
-        self.product.remove_item_from_cart(1)
+        self.product.remove_item_from_cart(0)
 
         self.assertEqual(len(self.product.x_button_in_cart()), 1)
-        self.assertEqual(self.product.text_name_prod_in_cart(0), "HP PRO TABLET 608 G1")
+        self.assertNotEqual(self.product.text_name_prod_in_cart(0), tablet)
 
     # add product to cart and move to shopping-cart page
     def test4(self):
@@ -161,6 +165,8 @@ class TestAccount(TestCase):
 
         self.assertEqual(total_price, self.shopping_cart.total_price())
 
+    # add 2 products, edit their quantities and check if the cart has been updated
+    # bug in the site!!!!!!!
     def test6(self):
         self.home_page.tablets().click()
         self.category.click_on_product(1)
@@ -170,18 +176,32 @@ class TestAccount(TestCase):
         self.category.click_on_product(4)
         self.product.add_to_cart().click()
         self.home_page.shopping_cart().click()
-        self.shopping_cart.edit_product(4)
-
-    def test10(self):
-        self.home_page.user().click()
-        self.account.popUp_username().send_keys("BasaLo")
-        self.account.popUp_password().send_keys("Tester1")
-        self.account.signIn_button().click()
-        self.assertEqual(self.account.user_menu_options(0), "My account")
+        self.shopping_cart.edit_product(1).click()
+        for i in range(2):
+            self.product.quantity_plus().click()
+        sleep(5)
+        mice_quantity = int(self.product.quantity().get_attribute("value"))
+        self.product.add_to_cart().click()
         sleep(2)
-        self.home_page.click_sign_out_btn()
+        self.shopping_cart.edit_product(1).click()
+        for i in range(5):
+            self.product.quantity_plus().click()
+        tablet_quantity = int(self.product.quantity().get_attribute("value"))
+        self.product.add_to_cart().click()
+        self.home_page.shopping_cart().click()
 
+        self.assertEqual(self.shopping_cart.product_quantity(0), tablet_quantity)
+        self.assertEqual(self.shopping_cart.product_quantity(1), mice_quantity)
 
+    # need to be fixed
+    # def test10(self):
+    #     self.home_page.user().click()
+    #     self.account.popUp_username().send_keys("BasaLo")
+    #     self.account.popUp_password().send_keys("Tester1")
+    #     self.account.signIn_button().click()
+    #     self.assertEqual(self.account.user_menu_options(0), "My account")
+    #     self.home_page.user().click()
+    #     self.home_page.sign_out_btn().click()
 
 
 

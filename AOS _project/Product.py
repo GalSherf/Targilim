@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class Product:
@@ -42,6 +43,7 @@ class Product:
 
     # return the add to cart button
     def add_to_cart(self):
+        self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[name="save_to_cart"]')))
         return self.driver.find_element(By.CSS_SELECTOR, '[name="save_to_cart"]')
 
     # return the cart shopping icon element in top right

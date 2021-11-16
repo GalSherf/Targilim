@@ -10,24 +10,30 @@ class HomePage:
         self.wait = WebDriverWait(self.driver, 10)
 
     def speakers(self):
+        self.wait.until(EC.visibility_of_element_located((By.ID, 'speakersImg')))
         return self.driver.find_element(By.ID, 'speakersImg')
 
     def tablets(self):
+        self.wait.until(EC.visibility_of_element_located((By.ID, 'tabletsImg')))
         return self.driver.find_element(By.ID, 'tabletsImg')
 
     def laptops(self):
+        self.wait.until(EC.visibility_of_element_located((By.ID, 'laptopsImg')))
         return self.driver.find_element(By.ID, 'laptopsImg')
 
     def mice(self):
+        self.wait.until(EC.visibility_of_element_located((By.ID, 'miceImg')))
         return self.driver.find_element(By.ID, 'miceImg')
 
     def headphones(self):
+        self.wait.until(EC.visibility_of_element_located((By.ID, 'headphonesImg')))
         return self.driver.find_element(By.ID, 'headphonesImg')
 
     def logo(self):
         return self.driver.find_element(By.CLASS_NAME, 'logo')
 
     def user(self):
+        self.wait.until(EC.element_to_be_clickable((By.ID, 'menuUserLink')))
         return self.driver.find_element(By.ID, 'menuUserLink')
 
     def create_user(self):
@@ -52,6 +58,7 @@ class HomePage:
         self.my_orders_btn().click()
 
     def sign_out_btn(self):
+        self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "label[translate='Sign_out'][class='option roboto-medium ng-scope']")))
         return self.driver.find_element(By.CSS_SELECTOR, "label[translate='Sign_out'][class='option roboto-medium ng-scope']")
 
     def click_sign_out_btn(self):
