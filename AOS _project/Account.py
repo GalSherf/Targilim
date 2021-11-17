@@ -1,13 +1,14 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 
 
 class Account:
     def __init__(self, driver):
         self.driver = driver
-        wait = WebDriverWait(self.driver, 10)
+        self.wait = WebDriverWait(self.driver, 10)
 
     def username(self):
         return self.driver.find_element(By.CSS_SELECTOR,'[name="usernameRegisterPage"]')
@@ -69,6 +70,14 @@ class Account:
 
     def signIn_button(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[type="button"]')
+
+    def click_sign_in(self):
+        self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '[type="button"]')))
+        self.signIn_button().click()
+
+    def x_button_pop_up(self):
+        self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "loginPopUpCloseBtn")))
+        return self.driver.find_element(By.CLASS_NAME, "loginPopUpCloseBtn")
 
     def loggedIn_username(self):
         return self.driver.find_element(By.CSS_SELECTOR, "#menuUserLink>span")

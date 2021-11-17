@@ -109,7 +109,6 @@ class TestAccount(TestCase):
         self.category.click_on_product(-1)
         tablet = self.product.product_name()
         self.product.add_to_cart().click()
-        # assert happens before add to cart
         self.assertEqual(self.product.text_name_prod_in_cart(1), headphone)
         self.assertEqual(self.product.text_name_prod_in_cart(0), tablet)
         self.assertEqual(len(self.product.x_button_in_cart()), 2)
@@ -202,22 +201,22 @@ class TestAccount(TestCase):
         self.driver.back()
         self.assertTrue(self.category.category_name() == tablets)
         self.driver.back()
+        self.assertEqual(self.home_page.mice().text, "MICE")
 
     # need to be fixed
+    # login with existence user and then logout
     def test10(self):
         self.home_page.user().click()
         self.account.popUp_username().send_keys("BasaLo")
         username = self.account.popUp_username().get_attribute("value")
         self.account.popUp_password().send_keys("Tester1")
-        self.account.signIn_button().click()
-        self.assertEqual(self.account.user_menu_options(0), "My account")
-        self.wait.until(EC.element_to_be_clickable((By.ID, 'speakersImg')))
+        self.account.click_sign_in()
+        self.wait.until(EC.visibility_of(self.home_page.mice()))
+        self.assertEqual(self.account.loggedIn_username().text, username)
         self.home_page.click_sign_out_btn()
         self.wait.until_not(EC.text_to_be_present_in_element((By.CSS_SELECTOR,'#menuUserLink>[data-ng-show="userCookie.response"]'), username))
-        self.home_page.user().click()
-        print(username)
-        self.assertNotEqual(username, self.account.popUp_username().get_attribute("value"))
-        self.driver.find_element(By.CLASS_NAME, "loginPopUpCloseBtn").click()
+        self.assertEqual(self.account.loggedIn_username().text, "")
+
 
 
 

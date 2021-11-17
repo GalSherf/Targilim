@@ -28,6 +28,6 @@ class ShoppingCart:
         else:
             return float(price[1:2] + price[4:])
 
-    #     return the edit button of input index
+    #return the edit button of input index
     def edit_product(self, number):
         return self.driver.find_elements(By.CSS_SELECTOR, '[translate="EDIT"]')[number]
