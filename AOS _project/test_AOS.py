@@ -203,16 +203,24 @@ class TestAccount(TestCase):
         self.assertTrue(self.category.category_name() == tablets)
         self.driver.back()
 
-
     # need to be fixed
-    # def test10(self):
-    #     self.home_page.user().click()
-    #     self.account.popUp_username().send_keys("BasaLo")
-    #     self.account.popUp_password().send_keys("Tester1")
-    #     self.account.signIn_button().click()
-    #     self.assertEqual(self.account.user_menu_options(0), "My account")
-    #     self.home_page.user().click()
-    #     self.home_page.sign_out_btn().click()
+    def test10(self):
+        self.home_page.user().click()
+        self.account.popUp_username().send_keys("BasaLo")
+        username = self.account.popUp_username().get_attribute("value")
+        self.account.popUp_password().send_keys("Tester1")
+        self.account.signIn_button().click()
+        self.assertEqual(self.account.user_menu_options(0), "My account")
+        self.wait.until(EC.element_to_be_clickable((By.ID, 'speakersImg')))
+        self.home_page.click_sign_out_btn()
+        self.wait.until_not(EC.text_to_be_present_in_element((By.CSS_SELECTOR,'#menuUserLink>[data-ng-show="userCookie.response"]'), username))
+        self.home_page.user().click()
+        print(username)
+        self.assertNotEqual(username, self.account.popUp_username().get_attribute("value"))
+        self.driver.find_element(By.CLASS_NAME, "loginPopUpCloseBtn").click()
+
+
+
 
 
 
