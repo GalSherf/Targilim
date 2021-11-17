@@ -91,3 +91,10 @@ class Account:
 
     def user_menu_options(self, number):
         return self.user_menu()[number].get_attribute("innerHTML")
+
+    def delete_account(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '[class="deleteMainBtnContainer a-button ng-scope"]')
+
+    def confirm_delete(self):
+        self.delete_account().click()
+        return self.driver.find_element(By.CSS_SELECTOR, 'div[class="deletePopupBtn deleteRed"]')

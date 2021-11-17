@@ -30,10 +30,11 @@ class HomePage:
         return self.driver.find_element(By.ID, 'headphonesImg')
 
     def logo(self):
+        self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'logo')))
         return self.driver.find_element(By.CLASS_NAME, 'logo')
 
     def user(self):
-        # self.wait.until(EC.element_to_be_clickable((By.ID, 'menuUserLink')))
+        self.wait.until(EC.element_to_be_clickable((By.ID, 'menuUserLink')))
         return self.driver.find_element(By.ID, 'menuUserLink')
 
     def create_user(self):
@@ -44,10 +45,12 @@ class HomePage:
         return self.driver.find_element(By.ID, 'shoppingCartLink')
 
     def my_account_btn(self):
-        return self.driver.find_element(By.CSS_SELECTOR, '[class="option ng-scope"][translate="My_account"]')
+        return self.driver.find_element(By.CSS_SELECTOR, '#loginMiniTitle>[translate="My_account"]')
 
     def click_my_account_btn(self):
+        self.wait.until(EC.element_to_be_clickable((By.ID, 'menuUserLink')))
         self.user().click()
+        self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#loginMiniTitle>[translate="My_account"]')))
         self.my_account_btn().click()
 
     def my_orders_btn(self):

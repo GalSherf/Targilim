@@ -34,7 +34,7 @@ class TestAccount(TestCase):
 
     def tearDown(self):
         print("tearDown")
-        sleep(2)
+        sleep(3)
         self.home_page.logo().click()
         self.driver.close()
 
@@ -203,6 +203,62 @@ class TestAccount(TestCase):
         self.driver.back()
         self.assertEqual(self.home_page.mice().text, "MICE")
 
+    # checkout product, create new account and pay with safepay. check that the cart is empty and order appear in orders page
+    def test8(self):
+        self.home_page.tablets().click()
+        self.category.click_on_product(0)
+        self.product.choose_color(1)
+        self.product.add_to_cart().click()
+        self.home_page.shopping_cart().click()
+        self.shopping_cart.checkout_btn().click()
+        self.order_payment.registration().click()
+        self.account.username().send_keys("NewUser")
+        self.account.email().send_keys("email@gmail.com")
+        self.account.password().send_keys("Pass2")
+        self.account.confirm_password().send_keys("Pass2")
+        self.account.first_name().send_keys('First')
+        self.account.last_name().send_keys("Last")
+        self.account.country().send_keys('Israel')
+        self.account.city().send_keys("sderot")
+        self.account.address().send_keys("struma 1")
+        self.account.state().send_keys("hadarom")
+        self.account.postal_code().send_keys("1234234")
+        self.account.agree_conditions().click()
+        self.account.register_btn().click()
+        self.order_payment.next_btn().click()
+        self.order_payment.payment_method_safepay().click()
+        self.order_payment.safepay_username().send_keys("username")
+        self.order_payment.safepay_password().send_keys("Password34")
+        self.order_payment.pay_now_safepay().click()
+        # to see if the purchase was successful
+        self.order_payment.wait_after_payment_text()
+        order_number = self.order_payment.order_number_text()
+        self.assertEqual(self.order_payment.after_payment_text().text, "Thank you for buying with Advantage")
+        self.home_page.shopping_cart().click()
+        # check if the shopping cart is empty
+        self.shopping_cart.wait_until_text_cart_empty()
+        self.assertEqual(self.shopping_cart.shopping_cart_empty().text, "Your shopping cart is empty")
+        self.shopping_cart.wait_until_text_cart_empty()
+        self.home_page.user().click()
+        self.home_page.my_orders_btn().click()
+        while True:
+            try:
+                self.home_page.my_orders_btn().click()
+                break
+            except:
+                pass
+        # check if the order is in the user orders
+        self.assertEqual(order_number, self.shopping_cart.order_number())
+        while True:
+            try:
+                self.home_page.user().click()
+                self.home_page.my_account_btn().click()
+                break
+            except:
+                pass
+        self.account.confirm_delete().click()
+
+    # checkout item with an existence account paying with creditCard and check for empty cart and order appear in orders page
     def test9(self):
         self.home_page.mice().click()
         self.category.click_on_product(0)
@@ -236,8 +292,6 @@ class TestAccount(TestCase):
         self.assertEqual(order_number, self.shopping_cart.order_number())
         self.shopping_cart.remove_order().click()
         self.shopping_cart.approve_remove().click()
-
-
 
     # login with existence user and then logout
     def test10(self):

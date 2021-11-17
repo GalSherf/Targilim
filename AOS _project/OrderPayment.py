@@ -60,5 +60,31 @@ class OrderPayment:
     def wait_order_number(self):
         self.wait.until(EC.visibility_of(self.order_number()))
 
+    def registration(self):
+        return self.driver.find_element(By.ID, 'registration_btnundefined')
+
+    def payment_method_safepay(self):
+        return self.driver.find_element(By.CSS_SELECTOR, 'input[name="safepay"]')
+
+    def payment_method_masterCredit(self):
+        return self.driver.find_element(By.CSS_SELECTOR, 'input[name="masterCredit"]')
+
+    def safepay_username(self):
+        return self.driver.find_element(By.CSS_SELECTOR, 'input[name="safepay_username"]')
+
+    def safepay_password(self):
+        return self.driver.find_element(By.CSS_SELECTOR, 'input[name="safepay_password"]')
+
+    def pay_now_safepay(self):
+        return self.driver.find_element(By.ID, "pay_now_btn_SAFEPAY")
+
+    def wait_after_payment_text(self):
+        self.wait.until(
+            EC.text_to_be_present_in_element((By.CSS_SELECTOR, 'div>h2>span'), "Thank you for buying with Advantage"))
+
+    def after_payment_text(self):
+        return self.driver.find_element(By.CSS_SELECTOR, 'div>h2>span')
+
+
 
 
