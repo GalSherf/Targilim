@@ -57,7 +57,7 @@ class TestAccount(TestCase):
     # add 3 products to cart and check if their details appear in the shopping-cart popUp
     def test2(self):
         self.home_page.headphones().click()
-        self.category.click_on_product(2)
+        self.category.click_on_product(-1)
         headphone_price = self.product.item_price()
         headphone_name = self.product.product_name()
         headphone_color = self.product.colors()[-1].get_attribute("title")
