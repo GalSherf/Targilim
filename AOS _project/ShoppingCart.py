@@ -36,3 +36,6 @@ class ShoppingCart:
 
     def wait_text_shopping_cart(self):
         self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[class="select  ng-binding"]')))
+
+    def checkout_btn(self):
+        return self.driver.find_element(By.ID, "checkOutButton")

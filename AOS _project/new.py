@@ -12,6 +12,7 @@ from HomePage import HomePage
 from Product import *
 from Category import *
 from ShoppingCart import *
+from OrderPayment import *
 
 service1 = Service(r"C:\selenium\chromedriver.exe")
 
@@ -25,26 +26,23 @@ homepage = HomePage(driver)
 product = Product(driver)
 category = Category(driver)
 shopping_cart = ShoppingCart(driver)
-#
-# homepage.headphones().click()
-# category.click_on_product(2)
-# product.add_to_cart().click()
-# homepage.logo().click()
+order_payment = OrderPayment(driver)
+
 
 homepage.laptops().click()
 print(category.category_name())
 category.click_on_product(-2)
 product.add_to_cart().click()
-# homepage.logo().click()
-# homepage.laptops().click()
-# category.click_on_product(-1)
-# product.add_to_cart().click()
-# homepage.logo().click()
-# homepage.headphones().click()
-# category.click_on_product(2)
-# product.add_to_cart().click()
-# homepage.shopping_cart().click()
-# shopping_cart.edit_product(0).click()
+homepage.shopping_cart().click()
+shopping_cart.checkout_btn().click()
+order_payment.username().send_keys("BasaLo")
+order_payment.password().send_keys("Tester1")
+order_payment.login_btn().click()
+order_payment.next_btn().click()
+order_payment.master_credit_radio().click()
+order_payment.pay_now_btn().click()
+
+
 
 
 
