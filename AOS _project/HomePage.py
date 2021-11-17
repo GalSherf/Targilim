@@ -66,3 +66,4 @@ class HomePage:
         self.user().click()
         self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "label[translate='Sign_out'][class='option roboto-medium ng-scope']")))
         self.sign_out_btn().click()
+

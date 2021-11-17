@@ -82,6 +82,9 @@ class Account:
     def loggedIn_username(self):
         return self.driver.find_element(By.CSS_SELECTOR, "#menuUserLink>span")
 
+    def wait_username_text(self):
+        self.wait.until_not(EC.text_to_be_present_in_element((By.CSS_SELECTOR, '#menuUserLink>[data-ng-show="userCookie.response"]'),self.loggedIn_username().text))
+
     def user_menu(self):
         return self.driver.find_elements(By.CSS_SELECTOR, "#menuUserLink>div>label")
 

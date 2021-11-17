@@ -156,7 +156,7 @@ class TestAccount(TestCase):
         laptop_quantity = int(self.product.quantity().get_attribute("value"))
         self.product.add_to_cart().click()
         self.home_page.shopping_cart().click()
-        self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[class="select  ng-binding"]')))
+        self.shopping_cart.wait_text_shopping_cart()
         total_price = tablet_quantity * tablet_price + mice_price * mice_quantity + laptop_quantity * laptop_price
         print(f"product: {tablet_name}, quantity: {tablet_quantity}, price: {tablet_price}")
         print(f"product: {mice_name}, quantity: {mice_quantity}, price: {mice_price}")
@@ -178,10 +178,8 @@ class TestAccount(TestCase):
         self.shopping_cart.edit_product(1).click()
         for i in range(2):
             self.product.quantity_plus().click()
-        sleep(5)
         mice_quantity = int(self.product.quantity().get_attribute("value"))
         self.product.add_to_cart().click()
-        sleep(2)
         self.shopping_cart.edit_product(1).click()
         for i in range(5):
             self.product.quantity_plus().click()
@@ -189,8 +187,9 @@ class TestAccount(TestCase):
         self.product.add_to_cart().click()
         self.home_page.shopping_cart().click()
 
-        self.assertEqual(self.shopping_cart.product_quantity(0), tablet_quantity)
         self.assertEqual(self.shopping_cart.product_quantity(1), mice_quantity)
+        self.assertEqual(self.shopping_cart.product_quantity(0), tablet_quantity)
+
 
     # after choosing a tablet go back to tablets and then go back to home page
     def test7(self):
@@ -203,7 +202,6 @@ class TestAccount(TestCase):
         self.driver.back()
         self.assertEqual(self.home_page.mice().text, "MICE")
 
-    # need to be fixed
     # login with existence user and then logout
     def test10(self):
         self.home_page.user().click()
@@ -214,7 +212,7 @@ class TestAccount(TestCase):
         self.wait.until(EC.visibility_of(self.home_page.mice()))
         self.assertEqual(self.account.loggedIn_username().text, username)
         self.home_page.click_sign_out_btn()
-        self.wait.until_not(EC.text_to_be_present_in_element((By.CSS_SELECTOR,'#menuUserLink>[data-ng-show="userCookie.response"]'), username))
+        self.account.wait_username_text()
         self.assertEqual(self.account.loggedIn_username().text, "")
 
 

@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 
 class ShoppingCart:
@@ -31,3 +33,6 @@ class ShoppingCart:
     #return the edit button of input index
     def edit_product(self, number):
         return self.driver.find_elements(By.CSS_SELECTOR, '[translate="EDIT"]')[number]
+
+    def wait_text_shopping_cart(self):
+        self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[class="select  ng-binding"]')))
