@@ -39,3 +39,27 @@ class ShoppingCart:
 
     def checkout_btn(self):
         return self.driver.find_element(By.ID, "checkOutButton")
+
+    def shopping_cart_empty(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '[class="roboto-bold ng-scope"]')
+
+    def wait_until_text_cart_empty(self):
+        self.wait.until(EC.text_to_be_present_in_element((By.CSS_SELECTOR, '[class="roboto-bold ng-scope"]'), "Your shopping cart is empty"))
+
+    def wait_until_cart_empty(self):
+        self.wait.until_not(EC.text_to_be_present_in_element((By.CSS_SELECTOR, '#shoppingCartLink>span'), "1"))
+
+    def first_row(self):
+        return self.driver.find_elements(By.CSS_SELECTOR, '.cover>table>tbody>tr>td>label[class="ng-binding"]')
+
+    def order_number(self):
+        return self.first_row()[0].text
+
+    def wait_order_number(self):
+        self.wait.until(EC.text_to_be_present_in_element((By.CSS_SELECTOR, '[class="roboto-regular sticky fixedImportant ng-scope"]'), "MY ORDERS"))
+
+    def remove_order(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '[translate="REMOVE"]')
+
+    def approve_remove(self):
+        return self.driver.find_element(By.ID, 'confBtn_1')

@@ -4,6 +4,7 @@ from HomePage import *
 from Account import *
 from Product import *
 from ShoppingCart import *
+from OrderPayment import *
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -23,12 +24,13 @@ class TestAccount(TestCase):
         self.driver.get("https://www.advantageonlineshopping.com/#/")
         self.driver.maximize_window()
         self.driver.implicitly_wait(10)
-        self.wait = WebDriverWait(self.driver, 10)
+        self.wait = WebDriverWait(self.driver, 15)
         self.home_page = HomePage(self.driver)
         self.account = Account(self.driver)
         self.category = Category(self.driver)
         self.product = Product(self.driver)
         self.shopping_cart = ShoppingCart(self.driver)
+        self.order_payment = OrderPayment(self.driver)
 
     def tearDown(self):
         print("tearDown")
@@ -200,6 +202,42 @@ class TestAccount(TestCase):
         self.assertTrue(self.category.category_name() == tablets)
         self.driver.back()
         self.assertEqual(self.home_page.mice().text, "MICE")
+
+    def test9(self):
+        self.home_page.mice().click()
+        self.category.click_on_product(0)
+        self.product.add_to_cart().click()
+        self.home_page.shopping_cart().click()
+        self.shopping_cart.checkout_btn().click()
+        self.order_payment.username().send_keys("Muigadol111")
+        self.order_payment.password().send_keys('Muigadol111')
+        self.order_payment.login_btn().click()
+        self.order_payment.next_btn().click()
+        self.order_payment.edit_btn().click()
+        self.order_payment.card_number().clear()
+        self.order_payment.cvv_number().clear()
+        while len(self.order_payment.cvv_number().get_attribute("value")) != 3:
+            self.order_payment.cvv_number().send_keys('1')
+        self.order_payment.cvv_number().clear()
+        while len(self.order_payment.cvv_number().get_attribute("value")) != 3:
+            self.order_payment.cvv_number().send_keys('1')
+        self.order_payment.expiration_month().send_keys("10")
+        self.order_payment.expiration_year().send_keys("2028")
+        self.order_payment.card_number().send_keys('123456789123')
+        self.order_payment.pay_now_btn().click()
+        self.order_payment.wait_order_number()
+        order_number = self.order_payment.order_number_text()
+        self.shopping_cart.wait_until_cart_empty()
+        self.home_page.shopping_cart().click()
+        self.shopping_cart.wait_until_text_cart_empty()
+        self.assertEqual(self.shopping_cart.shopping_cart_empty().text, "Your shopping cart is empty")
+        self.home_page.click_my_order_btn()
+        self.shopping_cart.wait_order_number()
+        self.assertEqual(order_number, self.shopping_cart.order_number())
+        self.shopping_cart.remove_order().click()
+        self.shopping_cart.approve_remove().click()
+
+
 
     # login with existence user and then logout
     def test10(self):

@@ -51,10 +51,12 @@ class HomePage:
         self.my_account_btn().click()
 
     def my_orders_btn(self):
-        return self.driver.find_element(By.CSS_SELECTOR, '.mobileTitle>div>[class="option ng-scope"][translate="My_Orders"]')
+        return self.driver.find_element(By.CSS_SELECTOR, '#menuUserLink>div>[translate="My_Orders"]')
 
     def click_my_order_btn(self):
+        self.wait.until(EC.element_to_be_clickable((By.ID, 'menuUserLink')))
         self.user().click()
+        self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#menuUserLink>div>[translate="My_Orders"]')))
         self.my_orders_btn().click()
 
     def sign_out_btn(self):
