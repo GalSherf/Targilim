@@ -34,7 +34,7 @@ class TestAccount(TestCase):
 
     def tearDown(self):
         print("tearDown")
-        sleep(3)
+        sleep(2)
         self.home_page.logo().click()
         self.driver.close()
 
