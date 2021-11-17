@@ -34,6 +34,7 @@ class Account:
     def country(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="countryListboxRegisterPage"]')
 
+    # get a country and select it from country select field
     def select_country(self, country):
         select_country = Select(self.country())
         select_country.select_by_visible_text(country)
@@ -82,6 +83,7 @@ class Account:
     def loggedIn_username(self):
         return self.driver.find_element(By.CSS_SELECTOR, "#menuUserLink>span")
 
+    # wait until the username text to be presented in element
     def wait_username_text(self):
         self.wait.until_not(EC.text_to_be_present_in_element((By.CSS_SELECTOR, '#menuUserLink>[data-ng-show="userCookie.response"]'),self.loggedIn_username().text))
 

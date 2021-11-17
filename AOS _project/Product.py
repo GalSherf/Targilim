@@ -33,7 +33,7 @@ class Product:
         else:
             return float(self.driver.find_element(By.CSS_SELECTOR, "#Description>h2").text[1] + self.driver.find_element(By.CSS_SELECTOR, "#Description>h2").text[3:])
 
-    # return the quantity elemnt
+    # return the quantity element
     def quantity(self):
         return self.driver.find_element(By.CSS_SELECTOR, "[name='quantity']")
 

@@ -58,7 +58,6 @@ class HomePage:
         self.my_orders_btn().click()
 
     def sign_out_btn(self):
-        # self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "label[translate='Sign_out'][class='option roboto-medium ng-scope']")))
         return self.driver.find_element(By.CSS_SELECTOR, "label[translate='Sign_out'][class='option roboto-medium ng-scope']")
 
     def click_sign_out_btn(self):
