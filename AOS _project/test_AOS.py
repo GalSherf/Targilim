@@ -190,7 +190,6 @@ class TestAccount(TestCase):
         self.assertEqual(self.shopping_cart.product_quantity(1), mice_quantity)
         self.assertEqual(self.shopping_cart.product_quantity(0), tablet_quantity)
 
-
     # after choosing a tablet go back to tablets and then go back to home page
     def test7(self):
         self.home_page.tablets().click()
