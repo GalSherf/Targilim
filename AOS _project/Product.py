@@ -81,19 +81,21 @@ class Product:
 
     # get a number and return the total price of the index product in cart
     def total_item_price(self, num):
-        prices = self.driver.find_elements(By.CSS_SELECTOR, '[class="price roboto-regular ng-binding"]')
-        if len(prices[num].get_attribute("innerHTML")) <= 7:
+        prices = self.driver.find_elements(By.CSS_SELECTOR, '[class="price roboto-regular ng-binding"]').text
+        if len(prices[num]) <= 7:
             return float(prices[num].get_attribute("innerHTML")[1:])
         else:
-            return float(prices[num].get_attribute("innerHTML")[1] + prices[num].get_attribute("innerHTML")[3:])
+            return float(prices[num].get_attribute("innerHTML")[1] + prices[num].get_attribute("innerHTML")[4:])
 
     # return the total price of shopping cart
     def total_price(self):
-        total_price = self.driver.find_element(By.CSS_SELECTOR, '[class="roboto-medium cart-total ng-binding"]')
-        if len(total_price.get_attribute("innerHTML")) <= 7:
-            return float(total_price.get_attribute("innerHTML")[1:])
+        total_price = self.driver.find_element(By.CSS_SELECTOR, '[class="roboto-medium cart-total ng-binding"]').text
+        if len(total_price) <= 7:
+            return float(total_price[1:])
+        elif len(total_price) == 9:
+            return float(total_price[1] + total_price[3:])
         else:
-            return float(total_price.get_attribute("innerHTML")[1] + total_price.get_attribute("innerHTML")[3:])
+            return float(total_price[1:2] + total_price[4:])
 
     # return a list of all x-button appear in shopping cart
     def x_button_in_cart(self):

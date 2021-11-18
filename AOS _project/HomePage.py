@@ -9,35 +9,42 @@ class HomePage:
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
 
-    # return
+    # return the speakers category element after it presented
     def speakers(self):
         self.wait.until(EC.visibility_of_element_located((By.ID, 'speakersImg')))
         return self.driver.find_element(By.ID, 'speakersImg')
 
+    # return the tablets category element after it presented
     def tablets(self):
         self.wait.until(EC.visibility_of_element_located((By.ID, 'tabletsImg')))
         return self.driver.find_element(By.ID, 'tabletsImg')
 
+    # return the laptops category element after it presented
     def laptops(self):
         self.wait.until(EC.visibility_of_element_located((By.ID, 'laptopsImg')))
         return self.driver.find_element(By.ID, 'laptopsImg')
 
+    # return the mice category element after it presented
     def mice(self):
         self.wait.until(EC.visibility_of_element_located((By.ID, 'miceImg')))
         return self.driver.find_element(By.ID, 'miceImg')
 
+    # return the headphones category element after it presented
     def headphones(self):
         self.wait.until(EC.visibility_of_element_located((By.ID, 'headphonesImg')))
         return self.driver.find_element(By.ID, 'headphonesImg')
 
+    # return the site logo element after it presented
     def logo(self):
         self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'logo')))
         return self.driver.find_element(By.CLASS_NAME, 'logo')
 
+    # return the user icon element after it presented
     def user(self):
         self.wait.until(EC.element_to_be_clickable((By.ID, 'menuUserLink')))
         return self.driver.find_element(By.ID, 'menuUserLink')
 
+    # return the user icon element after it presented
     def create_user(self):
         self.wait.until(EC.text_to_be_present_in_element((By.LINK_TEXT, "CREATE NEW ACCOUNT"), "CREATE NEW ACCOUNT"))
         return self.driver.find_element(By.LINK_TEXT, "CREATE NEW ACCOUNT")
