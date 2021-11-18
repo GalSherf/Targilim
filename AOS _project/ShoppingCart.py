@@ -46,7 +46,8 @@ class ShoppingCart:
     def wait_until_text_cart_empty(self):
         self.wait.until(EC.text_to_be_present_in_element((By.CSS_SELECTOR, '[class="roboto-bold ng-scope"]'), "Your shopping cart is empty"))
 
-    def wait_until_cart_empty(self):
+    # wait until sh
+    def wait_until_not_cart_empty(self):
         self.wait.until_not(EC.text_to_be_present_in_element((By.CSS_SELECTOR, '#shoppingCartLink>span'), "1"))
 
     def first_row(self):
