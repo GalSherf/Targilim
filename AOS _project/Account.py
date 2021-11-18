@@ -9,27 +9,35 @@ class Account:
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
 
+    # return username input element
     def username(self):
         return self.driver.find_element(By.CSS_SELECTOR,'[name="usernameRegisterPage"]')
 
+    # return email input element
     def email(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="emailRegisterPage"]')
 
+    # return password input element
     def password(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="passwordRegisterPage"]')
 
+    # return confirm_password input element
     def confirm_password(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="confirm_passwordRegisterPage"]')
 
+    # return first_name input element
     def first_name(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="first_nameRegisterPage"]')
 
+    # return last_name input element
     def last_name(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="last_nameRegisterPage"]')
 
+    # return phone_number input element
     def phone_number(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="phone_numberRegisterPage"]')
 
+    # return country element
     def country(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="countryListboxRegisterPage"]')
 
@@ -38,21 +46,27 @@ class Account:
         select_country = Select(self.country())
         select_country.select_by_visible_text(country)
 
+    # return city input element
     def city(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="cityRegisterPage"]')
 
+    # return address input element
     def address(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="addressRegisterPage"]')
 
+    # return state input element
     def state(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="state_/_province_/_regionRegisterPage"]')
 
+    # return state input element
     def postal_code(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="postal_codeRegisterPage"]')
 
+    # return agree_conditions check-box element
     def agree_conditions(self):
         return self.driver.find_element(By.CSS_SELECTOR, '[name="i_agree"]')
 
+    # return country element
     def register_btn(self):
         return self.driver.find_element(By.ID, 'register_btnundefined')
 
