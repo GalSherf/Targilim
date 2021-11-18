@@ -302,12 +302,3 @@ class TestAccount(TestCase):
         self.home_page.click_sign_out_btn()
         self.account.wait_username_text()
         self.assertEqual(self.account.loggedIn_username().text, "")
-
-
-
-
-
-
-
-
-

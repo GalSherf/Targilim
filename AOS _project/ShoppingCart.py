@@ -28,7 +28,7 @@ class ShoppingCart:
         elif len(price) == 9:
             return float(price[1] + price[3:])
         else:
-            return float(price[1:2] + price[4:])
+            return float(price[1:3] + price[4:])
 
     # return the edit button of input index
     def edit_product(self, number):

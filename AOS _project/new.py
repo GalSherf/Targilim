@@ -19,7 +19,7 @@ service1 = Service(r"C:\selenium\chromedriver.exe")
 
 driver = webdriver.Chrome(service=service1)
 
-driver.get("https://www.advantageonlineshopping.com/#/")
+driver.get("https://www.advantageonlineshopping.com/#/product/10")
 driver.maximize_window()
 driver.implicitly_wait(10)
 wait = WebDriverWait(driver,10)
@@ -30,23 +30,28 @@ shopping_cart = ShoppingCart(driver)
 order_payment = OrderPayment(driver)
 account = Account(driver)
 
-homepage.laptops().click()
-category.click_on_product(-1)
+sleep(2)
 for i in range(7):
     product.quantity_plus().click()
 product.add_to_cart().click()
+sleep(2)
 print(product.total_item_price(0))
+
 homepage.logo().click()
 homepage.laptops().click()
-category.click_on_product(1)
+category.click_on_product(-2)
 for i in range(7):
     product.quantity_plus().click()
 product.add_to_cart().click()
+sleep(2)
 print(product.total_item_price(0))
+
+print(product.total_price())
 homepage.shopping_cart().click()
 print(shopping_cart.total_price())
-
-print(account.signIn_button.__doc__())
+if shopping_cart.total_price() == product.total_price():
+    print("All Good")
+sleep(3)
 
 sleep(4)
 driver.close()

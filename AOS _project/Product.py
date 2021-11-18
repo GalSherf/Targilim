@@ -81,11 +81,14 @@ class Product:
 
     # get a number and return the total price of the index product in cart
     def total_item_price(self, num):
-        prices = self.driver.find_elements(By.CSS_SELECTOR, '[class="price roboto-regular ng-binding"]').text
-        if len(prices[num]) <= 7:
-            return float(prices[num].get_attribute("innerHTML")[1:])
+        prices = self.driver.find_elements(By.CSS_SELECTOR, '[class="price roboto-regular ng-binding"]')
+        price = prices[num].text
+        if len(price) <= 7:
+            return float(price[1:])
+        elif len(price) == 9:
+            return float(price[1] + price[3:])
         else:
-            return float(prices[num].get_attribute("innerHTML")[1] + prices[num].get_attribute("innerHTML")[4:])
+            return float(price[1:3] + price[4:])
 
     # return the total price of shopping cart
     def total_price(self):
@@ -93,9 +96,10 @@ class Product:
         if len(total_price) <= 7:
             return float(total_price[1:])
         elif len(total_price) == 9:
+            print(len(total_price))
             return float(total_price[1] + total_price[3:])
         else:
-            return float(total_price[1:2] + total_price[4:])
+            return float(total_price[1:3] + total_price[4:])
 
     # return a list of all x-button appear in shopping cart
     def x_button_in_cart(self):
@@ -104,6 +108,5 @@ class Product:
     # get a number and remove it's product from cart
     def remove_item_from_cart(self, number):
         self.x_button_in_cart()[number].click()
-
 
 
