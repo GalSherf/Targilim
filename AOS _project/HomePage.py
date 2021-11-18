@@ -9,6 +9,7 @@ class HomePage:
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
 
+    # return
     def speakers(self):
         self.wait.until(EC.visibility_of_element_located((By.ID, 'speakersImg')))
         return self.driver.find_element(By.ID, 'speakersImg')
