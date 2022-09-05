@@ -1,0 +1,41 @@
+from multiprocessing.connection import wait
+from time import sleep
+from selenium.webdriver.common.by import By
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+
+
+service = Service(r"C:\WebDriver\chromedriver.exe")
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("--incognito")
+
+driver = webdriver.Chrome(service=service, chrome_options=chrome_options)
+driver.get('https://agendamentosonline.mne.pt/AgendamentosOnline/app/scheduleAppointmentForm.jsf')
+driver.maximize_window()
+driver.implicitly_wait(5)
+driver.find_element(By.ID, "j_idt316").click()
+sleep(1)
+driver.find_element(By.ID, "scheduleForm:tabViewId:ccnum").send_keys("9061846653")
+cal_element = driver.find_element(By.ID, "scheduleForm:tabViewId:dataNascimento_input")
+cal_element.send_keys("08-06-1970")
+sleep(1)
+
+
+
+button_list = driver.find_elements(By.CLASS_NAME, "ui-button-text")
+button_list[2].click()
+
+
+dropdown = driver.find_element(By.ID, "scheduleForm:postcons_label")
+dropdown.click()
+sleep(2)
+driver.find_element(By.CLASS_NAME, "ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all").click()
+
+
+
+sleep(50)
+driver.close()
